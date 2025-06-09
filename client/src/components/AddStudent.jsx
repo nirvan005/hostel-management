@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router";
+import { useContext } from "react";
+import { StoreContext } from "../context/StoreContext";
 function AddStudent() {
+  const StoreContext = useContext(StoreContext);
+  const { url } = StoreContext[0];
   const [formData, setFormData] = useState({
     name: "",
     username: "",
@@ -24,7 +28,7 @@ function AddStudent() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:4000/add-student", formData);
+      await axios.post(`${url}/add-student`, formData);
       setAdded(1);
       setFormData({
         name: "",

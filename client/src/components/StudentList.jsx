@@ -3,8 +3,12 @@ import { useEffect, useState } from "react";
 import StudentCard from "./StudentCard";
 import { FaSearch } from "react-icons/fa";
 import { NavLink, useLocation } from "react-router";
+import { useContext } from "react";
+import { StoreContext } from "../context/StoreContext";
 
 export default function StudentList() {
+  const StoreContext = useContext(StoreContext);
+  const { url } = StoreContext[0];
   const location = useLocation();
   const collapse = location.state?.collapse;
   let [students, setStudents] = useState([]);
@@ -14,7 +18,7 @@ export default function StudentList() {
   }, []);
   const fetchStudentData = async () => {
     const api = axios.create({
-      baseURL: "http://localhost:4000",
+      baseURL: `${url}`,
     });
     try {
       const response = await api.get("/student");

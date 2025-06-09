@@ -2,8 +2,12 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router";
 import { useAuth } from "../auth/AuthContext";
+import { useContext } from "react";
+import { StoreContext } from "../context/StoreContext";
 function NewRoomStudent() {
   const { user_id } = useAuth();
+  const StoreContext = useContext(StoreContext);
+  const { url } = StoreContext[0];
   const [formData, setFormData] = useState({
     user_id: user_id,
     address: "",
@@ -28,7 +32,7 @@ function NewRoomStudent() {
     e.preventDefault();
     try {
       const api = axios.create({
-        baseURL: "http://localhost:4000",
+        baseURL: `${url}`,
       });
       await api.post("/room-request", formData);
       setAdded(1);

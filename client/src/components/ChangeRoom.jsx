@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router";
+import { StoreContext } from "../context/StoreContext";
 
 export default function ChangeRoom() {
+  const StoreContext = useContext(StoreContext);
+  const { url } = StoreContext[0];
   const [unassigned, setUnassigned] = useState([]);
   const [selectedId, setSelectedId] = useState("");
   const [formData, setFormData] = useState({
@@ -12,7 +15,7 @@ export default function ChangeRoom() {
   const navigate = useNavigate();
   useEffect(() => {
     axios
-      .get("http://localhost:4000/assigned-students")
+      .get(`${url}/assigned-students`)
       .then((res) => setUnassigned(res.data))
       .catch((err) => console.error(err));
     setAdded(0);
@@ -22,7 +25,7 @@ export default function ChangeRoom() {
     e.preventDefault();
     try {
       const body = { ...formData, student_id: selectedId };
-      await axios.post("http://localhost:4000/change-room", body);
+      await axios.post(`${url}/change-room`, body);
       console.log(body);
       setAdded(1);
       setTimeout(() => {

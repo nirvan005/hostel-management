@@ -2,9 +2,13 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router";
 import { useAuth } from "../auth/AuthContext";
+import { useContext } from "react";
+import { StoreContext } from "../context/StoreContext";
 function ChangeRoomStudent() {
   const { user_id } = useAuth();
   const [message, setMessage] = useState("");
+  const StoreContext = useContext(StoreContext);
+  const { url } = StoreContext[0];
   const [formData, setFormData] = useState({
     user_id: user_id,
     preferred_room: "",
@@ -25,7 +29,7 @@ function ChangeRoomStudent() {
     e.preventDefault();
     try {
       const api = axios.create({
-        baseURL: "http://localhost:4000",
+        baseURL: url,
       });
       await api.post("/change-room-request", formData);
       setAdded(1);

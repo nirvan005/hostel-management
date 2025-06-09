@@ -1,12 +1,16 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useContext } from "react";
+import { StoreContext } from "../context/StoreContext";
 export default function CheckOuts() {
+  const StoreContext = useContext(StoreContext);
+  const { url } = StoreContext[0];
   const [assigned, setAssigned] = useState([]);
   const [selectedId, setSelectedId] = useState("");
   const [Data, setData] = useState([]);
   useEffect(() => {
     axios
-      .get("http://localhost:4000/assigned-students")
+      .get(`${url}/assigned-students`)
       .then((res) => setAssigned(res.data))
       .catch((err) => console.error(err));
   }, []);
@@ -51,7 +55,7 @@ export default function CheckOuts() {
           setData([]);
           setSelectedId(e.target.value);
           axios
-            .post("http://localhost:4000/CheckOuts", {
+            .post(`${url}/CheckOuts`, {
               student_id: e.target.value,
             })
             .then((res) => {

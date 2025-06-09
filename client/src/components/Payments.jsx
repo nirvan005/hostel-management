@@ -1,8 +1,12 @@
 // Payments.jsx
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useContext } from "react";
+import { StoreContext } from "../context/StoreContext";
 
 function Payments() {
+  const StoreContext = useContext(StoreContext);
+  const { url } = StoreContext[0];
   const [activeTab, setActiveTab] = useState("records");
   const [pendingList, setPendingList] = useState([]);
   const [recordsList, setRecordsList] = useState([]);
@@ -15,17 +19,15 @@ function Payments() {
   }, []);
 
   const fetchData = async () => {
-    const paidRes = await axios.get("http://localhost:4000/payments");
+    const paidRes = await axios.get(`${url}/payments`);
     setRecordsList(paidRes.data);
-    const pendingRes = await axios.get(
-      "http://localhost:4000/payments/pending"
-    );
+    const pendingRes = await axios.get(`${url}/payments/pending`);
     setPendingList(pendingRes.data);
   };
 
   const handleUpdate = async () => {
     try {
-      await axios.post("http://localhost:4000/payments/mark-paid", {
+      await axios.post(`${url}/payments/mark-paid`, {
         student_id: selectedStudent,
       });
       setAdded(1);

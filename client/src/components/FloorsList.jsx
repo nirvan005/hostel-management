@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
 import Floors from "./Floors";
 import axios from "axios";
+import { useContext } from "react";
+import { StoreContext } from "../context/StoreContext";
 
 export default function FloorsList() {
+  const StoreContext = useContext(StoreContext);
+  const { url } = StoreContext[0];
   const [floorData, setFloorData] = useState([]);
   const getFloors = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/floors");
+      const response = await axios.get(`${url}/floors`);
 
       const groupedData = response.data.reduce(
         (acc, { floor_no, room_no, status }) => {

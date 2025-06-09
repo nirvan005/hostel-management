@@ -14,9 +14,13 @@ import LoginLogo from "react-login-page/logo";
 import { useAuth } from "../auth/AuthContext";
 import { useNavigate } from "react-router";
 import axios from "axios";
+import { useContext } from "react";
+import { StoreContext } from "../context/StoreContext";
 
 const styles = { height: 690 };
 const LoginAdmin = () => {
+  const StoreContext = useContext(StoreContext);
+  const { url } = StoreContext[0];
   const auth = useAuth();
   const navigate = useNavigate();
   const userRef = useRef();
@@ -65,7 +69,7 @@ const LoginAdmin = () => {
     }
     if (checkEmail && checkPassword) {
       const api = axios.create({
-        baseURL: "http://localhost:4000",
+        baseURL: `${url}`,
       });
       const response = await api.post("/signup-admin", {
         username,
@@ -87,7 +91,7 @@ const LoginAdmin = () => {
     const username = userRef.current.value;
     const password = passRef.current.value;
     const api = axios.create({
-      baseURL: "http://localhost:4000",
+      baseURL: `${url}`,
     });
     try {
       const response = await api.post("/login-admin", {

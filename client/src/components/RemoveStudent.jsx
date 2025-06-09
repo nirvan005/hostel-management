@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router";
+import { use } from "react";
+import { useContext } from "react";
+import { StoreContext } from "../context/StoreContext";
 function RemoveStudent() {
+  const StoreContext = useContext(StoreContext);
+  const { url } = StoreContext[0];
   const [formData, setFormData] = useState({
     end_date: "",
   });
@@ -9,7 +14,7 @@ function RemoveStudent() {
   const [selectedId, setSelectedId] = useState("");
   useEffect(() => {
     axios
-      .get("http://localhost:4000/assigned-students")
+      .get(`${url}/assigned-students`)
       .then((res) => setAssigned(res.data))
       .catch((err) => console.error(err));
     setAdded(0);
@@ -27,7 +32,7 @@ function RemoveStudent() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:4000/student/remove-student", {
+      await axios.post(`${url}/student/remove-student`, {
         student_id: selectedId,
         end_date: formData.end_date,
       });

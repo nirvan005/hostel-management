@@ -2,17 +2,19 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import StudentCard from "./StudentCard";
 import { useParams } from "react-router";
+import { useContext } from "react";
+import { StoreContext } from "../context/StoreContext";
 
 const Room = () => {
+  const StoreContext = useContext(StoreContext);
+  const { url } = StoreContext[0];
   const [students, setStudents] = useState([]);
   const [loading, setLoading] = useState(true);
   const { room_no } = useParams();
   useEffect(() => {
     const fetchStudents = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:4000/student/${room_no}`
-        );
+        const response = await axios.get(`${url}/student/${room_no}`);
         setStudents(response.data);
       } catch (error) {
         console.error("Error fetching students:", error);
