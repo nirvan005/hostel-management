@@ -31,7 +31,7 @@ const Request = db.collection("request");
 // const requests = db.collection("requests"); // Removed unused variable
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://hostel-management-system-a2zz.onrender.com/",
     methods: ["GET", "POST"],
     credentials: true,
   })
