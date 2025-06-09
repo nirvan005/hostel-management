@@ -5,8 +5,8 @@ import { useContext } from "react";
 import { StoreContext } from "../context/StoreContext";
 
 function Payments() {
-  const StoreContext = useContext(StoreContext);
-  const { url } = StoreContext[0];
+  const urlStore = useContext(StoreContext);
+  const { url } = urlStore[0];
   const [activeTab, setActiveTab] = useState("records");
   const [pendingList, setPendingList] = useState([]);
   const [recordsList, setRecordsList] = useState([]);

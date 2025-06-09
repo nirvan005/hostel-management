@@ -19,8 +19,8 @@ import { StoreContext } from "../context/StoreContext";
 
 const styles = { height: 690 };
 const LoginAdmin = () => {
-  const StoreContext = useContext(StoreContext);
-  const { url } = StoreContext[0];
+  const urlStore = useContext(StoreContext);
+  const { url } = urlStore[0];
   const auth = useAuth();
   const navigate = useNavigate();
   const userRef = useRef();

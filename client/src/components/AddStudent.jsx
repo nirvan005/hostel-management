@@ -4,8 +4,8 @@ import { useNavigate } from "react-router";
 import { useContext } from "react";
 import { StoreContext } from "../context/StoreContext";
 function AddStudent() {
-  const StoreContext = useContext(StoreContext);
-  const { url } = StoreContext[0];
+  const storeContext = useContext(StoreContext);
+  const { url } = storeContext[0];
   const [formData, setFormData] = useState({
     name: "",
     username: "",

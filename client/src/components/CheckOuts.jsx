@@ -3,8 +3,8 @@ import axios from "axios";
 import { useContext } from "react";
 import { StoreContext } from "../context/StoreContext";
 export default function CheckOuts() {
-  const StoreContext = useContext(StoreContext);
-  const { url } = StoreContext[0];
+  const urlStore = useContext(StoreContext);
+  const { url } = urlStore[0];
   const [assigned, setAssigned] = useState([]);
   const [selectedId, setSelectedId] = useState("");
   const [Data, setData] = useState([]);

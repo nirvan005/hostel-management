@@ -7,8 +7,8 @@ import { StoreContext } from "../context/StoreContext";
 function ChangeRoomStudent() {
   const { user_id } = useAuth();
   const [message, setMessage] = useState("");
-  const StoreContext = useContext(StoreContext);
-  const { url } = StoreContext[0];
+  const urlStore = useContext(StoreContext);
+  const { url } = urlStore[0];
   const [formData, setFormData] = useState({
     user_id: user_id,
     preferred_room: "",

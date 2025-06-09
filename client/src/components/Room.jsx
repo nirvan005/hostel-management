@@ -6,8 +6,8 @@ import { useContext } from "react";
 import { StoreContext } from "../context/StoreContext";
 
 const Room = () => {
-  const StoreContext = useContext(StoreContext);
-  const { url } = StoreContext[0];
+  const urlStore = useContext(StoreContext);
+  const { url } = urlStore[0];
   const [students, setStudents] = useState([]);
   const [loading, setLoading] = useState(true);
   const { room_no } = useParams();

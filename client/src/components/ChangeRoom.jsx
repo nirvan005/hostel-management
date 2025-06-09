@@ -4,8 +4,8 @@ import { useNavigate } from "react-router";
 import { StoreContext } from "../context/StoreContext";
 
 export default function ChangeRoom() {
-  const StoreContext = useContext(StoreContext);
-  const { url } = StoreContext[0];
+  const urlStore = useContext(StoreContext);
+  const { url } = urlStore[0];
   const [unassigned, setUnassigned] = useState([]);
   const [selectedId, setSelectedId] = useState("");
   const [formData, setFormData] = useState({
